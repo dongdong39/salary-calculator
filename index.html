@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연봉 인상 계산기</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>연봉 인상 계산기</h1>
+            <p class="subtitle">매년 연봉이 오르면, 퇴직할 때 얼마일까?</p>
+        </header>
+
+        <!-- 입력 -->
+        <div class="card">
+            <div class="section-title">계산 조건</div>
+
+            <div class="input-group">
+                <label for="salary">현재 연봉</label>
+                <div class="input-wrapper">
+                    <input type="text" id="salary" inputmode="numeric" placeholder="5000" />
+                    <span class="unit">만원</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="growthRate">예상 연봉 인상률</label>
+                <div class="input-wrapper compact">
+                    <input type="text" id="growthRate" inputmode="numeric" placeholder="5" />
+                    <span class="unit">%</span>
+                </div>
+                <div class="quick-select compact">
+                    <button class="quick-btn small" data-target="growthRate" data-value="2">2%</button>
+                    <button class="quick-btn small" data-target="growthRate" data-value="3">3%</button>
+                    <button class="quick-btn small" data-target="growthRate" data-value="5">5%</button>
+                    <button class="quick-btn small" data-target="growthRate" data-value="7">7%</button>
+                </div>
+                <div class="input-hint">일반적으로 연 3~5% 수준입니다</div>
+            </div>
+
+            <div class="input-group">
+                <label for="years">남은 근무 기간</label>
+                <div class="input-wrapper compact">
+                    <input type="text" id="years" inputmode="numeric" placeholder="30" />
+                    <span class="unit">년</span>
+                </div>
+                <div class="quick-select compact">
+                    <button class="quick-btn small" data-target="years" data-value="10">10년</button>
+                    <button class="quick-btn small" data-target="years" data-value="20">20년</button>
+                    <button class="quick-btn small" data-target="years" data-value="30">30년</button>
+                </div>
+            </div>
+
+            <button class="btn btn-calc" onclick="calculate()">계산하기</button>
+        </div>
+
+        <!-- 결과 -->
+        <div class="card" id="resultCard" style="display:none; margin-top:16px">
+            <h2>계산 결과</h2>
+
+            <div class="result-summary">
+                <div class="result-item highlight">
+                    <span class="result-label">퇴직 시 예상 연봉</span>
+                    <span class="result-value" id="resultFinal">-</span>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <div class="result-item">
+                    <span class="result-label">현재 연봉</span>
+                    <span class="result-value" id="resultCurrent">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">퇴직 시 월급 (세전)</span>
+                    <span class="result-value accent" id="resultMonthly">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">총 인상 배율</span>
+                    <span class="result-value accent" id="resultMultiple">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">총 누적 수입</span>
+                    <span class="result-value" id="resultTotalEarned">-</span>
+                </div>
+            </div>
+
+            <!-- 연도별 테이블 -->
+            <div class="result-section">
+                <h3>연도별 연봉 변화</h3>
+                <div class="year-table">
+                    <div class="year-row header">
+                        <span>년차</span>
+                        <span>연봉</span>
+                        <span>월급</span>
+                        <span>인상액</span>
+                    </div>
+                    <div id="yearTableBody"></div>
+                </div>
+            </div>
+
+            <!-- 차트 -->
+            <div class="result-section">
+                <h3>연봉 성장 그래프</h3>
+                <div class="chart-container">
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>단순 복리 인상 가정이며, 실제 연봉은 다를 수 있습니다.</p>
+            <a href="https://dongdong39.github.io/pension-calculator/" class="footer-link">연금 계산기로 돌아가기 →</a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
