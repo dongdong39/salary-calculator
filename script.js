@@ -51,7 +51,7 @@ function calculate() {
 
     let valid = true;
     if (salary <= 0) { showError('salary', '연봉을 입력해주세요'); valid = false; }
-    if (rate <= 0) { showError('growthRate', '인상률을 입력해주세요'); valid = false; }
+    if (document.getElementById('growthRate').value === '') { showError('growthRate', '인상률을 입력해주세요'); valid = false; }
     if (years <= 0 || years > 50) { showError('years', '기간을 입력해주세요'); valid = false; }
     if (!valid) return;
 
